@@ -15,21 +15,6 @@ PRODUCTS = [
 # Same scope currently used for MVP runs.
 ADDRESSES = [
     {
-        "address_id": 1,
-        "zone_type": "high_income",
-        "address_text": "Avenida Campos Elíseos 470,  Lomas de Chapultepec I Sección,  11000 Miguel Hidalgo, CDMX,  México",
-    },
-    {
-        "address_id": 2,
-        "zone_type": "corporate",
-        "address_text": "Paseo de la Reforma 222,  Juárez,  06600 Cuauhtémoc, CDMX,  México",
-    },
-    {
-        "address_id": 3,
-        "zone_type": "middle_class",
-        "address_text": "Avenida División del Norte 1300,  Letrán Valle,  03650 Benito Juárez, CDMX,  México",
-    },
-    {
         "address_id": 4,
         "zone_type": "student",
         "address_text": "Avenida Universidad 3000,  Ciudad Universitaria,  04510 Coyoacán, CDMX,  México",
