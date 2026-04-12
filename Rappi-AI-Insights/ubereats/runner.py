@@ -3,7 +3,7 @@ from __future__ import annotations
 import asyncio
 import re
 from datetime import datetime, timezone
-from typing import Callable
+from typing import Awaitable, Callable
 
 from playwright.async_api import Browser
 
@@ -65,6 +65,22 @@ def build_jobs() -> list[CheckoutJob]:
                 )
             )
     return jobs
+
+
+async def retry_once_after_settle(
+    action_coro: Callable[[], Awaitable[None]],
+    *,
+    page,
+    logger: Callable[[str], None],
+    step_name: str,
+    retry_wait_ms: int = 2000,
+) -> None:
+    try:
+        await action_coro()
+    except Exception:
+        logger(f"[DEBUG] {step_name}: first attempt failed, retrying after {retry_wait_ms}ms")
+        await page.wait_for_timeout(retry_wait_ms)
+        await action_coro()
 
 
 async def run_single_checkout(
@@ -133,6 +149,8 @@ async def run_single_checkout(
         step_log(log, current_step, "Open app")
         await page.goto(config.START_URL, wait_until="domcontentloaded")
         await wait_for_home_ready(page, timeout_ms=min(job.timeout_ms, 14000), logger=log)
+        log("[DEBUG] home_ready_settle: waiting 3000ms")
+        await page.wait_for_timeout(3000)
 
         current_step = 2
         collector.set_step(current_step)
@@ -142,7 +160,13 @@ async def run_single_checkout(
         current_step = 3
         collector.set_step(current_step)
         step_log(log, current_step, "Clear cart")
-        await clear_cart_if_needed(page, selectors=selectors, timeout_ms=job.timeout_ms, logger=log)
+        await retry_once_after_settle(
+            lambda: clear_cart_if_needed(page, selectors=selectors, timeout_ms=job.timeout_ms, logger=log),
+            page=page,
+            logger=log,
+            step_name="clear_cart_after_home_ready",
+            retry_wait_ms=2000,
+        )
 
         current_step = 4
         collector.set_step(current_step)

@@ -23,7 +23,7 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def load_and_aggregate(path: Path) -> pd.DataFrame:
+def load_and_aggregate(path: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
     df = pd.read_csv(path)
     total_rows = len(df)
     df = df[df["status"].astype(str).str.lower() == "success"].copy()
@@ -50,7 +50,7 @@ def load_and_aggregate(path: Path) -> pd.DataFrame:
 
     df = df.dropna(subset=["platform", "zone_type"])
     if df.empty:
-        return df
+        return df, df
 
     agg = (
         df.groupby(["platform", "zone_type"], as_index=False, observed=False)[numeric_cols]
@@ -66,7 +66,29 @@ def load_and_aggregate(path: Path) -> pd.DataFrame:
     if not present_platforms:
         present_platforms = sorted(agg["platform"].astype(str).unique().tolist())
     agg["platform"] = pd.Categorical(agg["platform"], categories=present_platforms, ordered=True)
-    return agg
+    return agg, df
+
+
+def _add_bar_labels(
+    ax: plt.Axes,
+    bars,
+    raw_values: pd.Series | list[float],
+    *,
+    suffix: str = "",
+) -> None:
+    for idx, bar in enumerate(bars):
+        value = raw_values.iloc[idx] if hasattr(raw_values, "iloc") else raw_values[idx]
+        if pd.isna(value):
+            continue
+        label = f"{float(value):.1f}{suffix}"
+        ax.text(
+            bar.get_x() + (bar.get_width() / 2.0),
+            bar.get_height(),
+            label,
+            ha="center",
+            va="bottom",
+            fontsize=8,
+        )
 
 
 def _grouped_bar(
@@ -76,6 +98,7 @@ def _grouped_bar(
     y_label: str,
     output_file: Path,
     dpi: int,
+    label_suffix: str = "",
 ) -> None:
     zones = list(pivot_df.index)
     platforms = list(pivot_df.columns)
@@ -91,6 +114,7 @@ def _grouped_bar(
         for idx, value in enumerate(values):
             if pd.isna(value):
                 bars[idx].set_alpha(0.15)
+        _add_bar_labels(ax, bars, values, suffix=label_suffix)
 
     ax.set_title(title, fontsize=14)
     ax.set_xlabel("Zone", fontsize=11)
@@ -110,7 +134,7 @@ def plot_total_price(agg: pd.DataFrame, output_dir: Path, dpi: int) -> None:
     )
     _grouped_bar(
         pivot_df,
-        title="Average Order Cost by Zone",
+        title="Average Total Order Cost by Zone",
         y_label="Average Total (MXN)",
         output_file=output_dir / "average_order_cost_by_zone.png",
         dpi=dpi,
@@ -124,10 +148,11 @@ def plot_fee_share(agg: pd.DataFrame, output_dir: Path, dpi: int) -> None:
     )
     _grouped_bar(
         pivot_df,
-        title="Average Fee Share (% of Total)",
+        title="Average Fee Share by Zone",
         y_label="Average Fee Share (%)",
         output_file=output_dir / "average_fee_share_pct.png",
         dpi=dpi,
+        label_suffix="%",
     )
 
 
@@ -144,14 +169,21 @@ def plot_fee_breakdown_stacked(agg: pd.DataFrame, output_dir: Path, dpi: int) ->
             .set_index("zone_type")
             .reindex(zones)
         )
-        delivery = sub["delivery_fee"].fillna(0)
-        service = sub["service_fee"].fillna(0)
+        delivery_raw = sub["delivery_fee"]
+        service_raw = sub["service_fee"]
+        delivery = delivery_raw.fillna(0)
+        service = service_raw.fillna(0)
         offsets = [v - 0.4 + (i + 0.5) * bar_width for v in x]
 
-        ax.bar(offsets, delivery, width=bar_width, label=f"{platform} - Delivery")
-        ax.bar(offsets, service, width=bar_width, bottom=delivery, label=f"{platform} - Service")
+        bars_delivery = ax.bar(offsets, delivery, width=bar_width, label=f"{platform} - Delivery")
+        bars_service = ax.bar(offsets, service, width=bar_width, bottom=delivery, label=f"{platform} - Service")
 
-    ax.set_title("Fee Composition by Platform", fontsize=14)
+        for idx in range(len(zones)):
+            if pd.isna(delivery_raw.iloc[idx]) and pd.isna(service_raw.iloc[idx]):
+                bars_delivery[idx].set_alpha(0.15)
+                bars_service[idx].set_alpha(0.15)
+
+    ax.set_title("Fee Composition by Zone and Platform", fontsize=14)
     ax.set_xlabel("Zone", fontsize=11)
     ax.set_ylabel("Average Fee Amount (MXN)", fontsize=11)
     ax.set_xticks(x)
@@ -169,11 +201,61 @@ def plot_cost_per_minute(agg: pd.DataFrame, output_dir: Path, dpi: int) -> None:
     )
     _grouped_bar(
         pivot_df,
-        title="Cost per Minute (Price vs Delivery Time)",
+        title="Average Cost per Minute by Zone",
         y_label="Average MXN per Minute",
         output_file=output_dir / "cost_per_minute_by_zone.png",
         dpi=dpi,
     )
+
+
+def plot_uber_premium_vs_rappi(agg: pd.DataFrame, output_dir: Path, dpi: int) -> None:
+    pivot_total = (
+        agg.pivot(index="zone_type", columns="platform", values="total")
+        .sort_index()
+    )
+    if "Rappi" not in pivot_total.columns or "Uber Eats" not in pivot_total.columns:
+        print("[WARN] Skipping premium plot: both Rappi and Uber Eats totals are required.")
+        return
+
+    premium = ((pivot_total["Uber Eats"] - pivot_total["Rappi"]) / pivot_total["Rappi"]) * 100.0
+    premium = premium.replace([float("inf"), float("-inf")], pd.NA)
+
+    zones = list(premium.index)
+    x = list(range(len(zones)))
+    fig, ax = plt.subplots(figsize=(11, 6))
+    bars = ax.bar(x, premium.fillna(0), width=0.6, label="Uber Eats Premium")
+    for idx, value in enumerate(premium):
+        if pd.isna(value):
+            bars[idx].set_alpha(0.15)
+    _add_bar_labels(ax, bars, premium, suffix="%")
+
+    ax.set_title("Uber Eats Premium vs Rappi by Zone", fontsize=14)
+    ax.set_xlabel("Zone", fontsize=11)
+    ax.set_ylabel("Premium vs Rappi (%)", fontsize=11)
+    ax.set_xticks(x)
+    ax.set_xticklabels([str(z).replace("_", " ").title() for z in zones], rotation=20, ha="right")
+    ax.legend(frameon=False, fontsize=10)
+    fig.tight_layout()
+    fig.savefig(output_dir / "uber_premium_vs_rappi_pct.png", dpi=max(dpi, 200), bbox_inches="tight")
+    plt.close(fig)
+
+
+def build_platform_summary(df: pd.DataFrame, output_dir: Path) -> None:
+    summary = (
+        df.groupby("platform", as_index=False, observed=False)
+        .agg(
+            average_total=("total", "mean"),
+            average_delivery_fee=("delivery_fee", "mean"),
+            average_service_fee=("service_fee", "mean"),
+            average_fee_share_pct=("fee_share_pct", "mean"),
+            average_total_per_minute=("total_per_minute", "mean"),
+            average_eta_avg_minutes=("eta_avg_minutes", "mean"),
+            observation_count=("platform", "size"),
+        )
+    )
+    summary["platform"] = pd.Categorical(summary["platform"], categories=PLATFORM_ORDER, ordered=True)
+    summary = summary.sort_values("platform").reset_index(drop=True)
+    summary.to_csv(output_dir / "platform_summary_metrics.csv", index=False, encoding="utf-8")
 
 
 def main() -> int:
@@ -182,14 +264,16 @@ def main() -> int:
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    agg = load_and_aggregate(input_path)
+    agg, df_success = load_and_aggregate(input_path)
     if agg.empty:
         raise RuntimeError("No successful rows available after filtering.")
 
+    build_platform_summary(df_success, output_dir)
     plot_total_price(agg, output_dir, args.dpi)
     plot_fee_share(agg, output_dir, args.dpi)
     plot_fee_breakdown_stacked(agg, output_dir, args.dpi)
     plot_cost_per_minute(agg, output_dir, args.dpi)
+    plot_uber_premium_vs_rappi(agg, output_dir, args.dpi)
     print(f"[INFO] Charts saved to: {output_dir}")
     return 0
 

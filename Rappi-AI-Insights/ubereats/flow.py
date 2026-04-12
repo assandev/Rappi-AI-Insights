@@ -11,11 +11,13 @@ from ubereats.location import set_address_if_needed
 from ubereats.product_catalog import select_product_card_exact
 from ubereats.readiness import (
     wait_for_cart_ready,
+    wait_for_cart_state_updated,
     wait_for_checkout_ready,
     wait_for_home_ready,
+    wait_for_product_modal_ready,
     wait_for_restaurant_ready,
     wait_for_search_results_ready,
-    wait_for_store_search_results_active,
+    wait_for_store_search_fully_applied,
 )
 from ubereats.selectors import build_selectors
 from ubereats.ui_actions import safe_click, safe_fill, safe_press_enter, safe_select_first_result
@@ -51,14 +53,14 @@ async def search_restaurant(
         page,
         search_sel,
         value=restaurant,
-        timeout_ms=min(timeout_ms, 7000),
+        timeout_ms=min(timeout_ms, 12000),
         logger=logger,
         step_name="global_search_input",
     )
     await safe_press_enter(
         page,
         search_sel,
-        timeout_ms=min(timeout_ms, 2500),
+        timeout_ms=min(timeout_ms, 8000),
         logger=logger,
         step_name="global_search_submit",
     )
@@ -98,7 +100,7 @@ async def search_product_in_store(
                 page,
                 selector,
                 value=product,
-                timeout_ms=min(timeout_ms, 7000),
+                timeout_ms=min(timeout_ms, 12000),
                 logger=logger,
                 step_name="store_search_input",
             )
@@ -113,11 +115,11 @@ async def search_product_in_store(
             f"Store search input unavailable. Tried={selectors['store_search_input']} LastError={last_exc}"
         )
 
-    await wait_for_store_search_results_active(
+    await wait_for_store_search_fully_applied(
         page,
         expected_product=product,
         preferred_input_selector=filled_selector,
-        timeout_ms=min(timeout_ms, 7000),
+        timeout_ms=min(timeout_ms, 15000),
         logger=logger,
     )
 
@@ -132,34 +134,37 @@ async def add_product(
     badge_before = await read_cart_badge_count(page, selectors["cart_badge"][0])
     await select_product_card_exact(page, product=product, timeout_ms=timeout_ms, logger=logger)
 
-    # 1) If product modal appears, confirm with "Agregar 1 al pedido".
-    if await page.locator(selectors["confirm_add"][0]).first.is_visible(timeout=1200):
+    modal_ready = await wait_for_product_modal_ready(
+        page,
+        timeout_ms=min(timeout_ms, 12000),
+        logger=logger,
+    )
+    if modal_ready:
         await safe_click(
             page,
             selectors["confirm_add"][0],
-            timeout_ms=min(timeout_ms, 4000),
+            timeout_ms=min(timeout_ms, 9000),
             logger=logger,
             step_name="confirm_add_button",
         )
 
-    # 2) Open cart via cart button when available.
-    cart_opened = False
-    if await page.locator(selectors["cart_open"][0]).first.is_visible(timeout=1800):
-        await safe_click(
-            page,
-            selectors["cart_open"][0],
-            timeout_ms=min(3500, timeout_ms),
-            logger=logger,
-            step_name="post_add_open_cart",
-            allow_force=True,
-        )
-        await wait_for_cart_ready(page, timeout_ms=min(timeout_ms, 5000), logger=logger)
-        cart_opened = True
+    transition_updated = await wait_for_cart_state_updated(
+        page,
+        previous_badge_count=badge_before,
+        selectors=selectors,
+        timeout_ms=min(timeout_ms, 12000),
+        logger=logger,
+    )
+    if not transition_updated:
+        raise CheckoutStepError("Cart state did not update after add-product action (post-click transition not confirmed).")
 
-    # 3) Click "Continuar" to reach checkout.
+    if "/checkout" in page.url.lower():
+        logger("[DEBUG] post_add_transition: already on checkout URL")
+        return
+
     continue_ready = False
     try:
-        await page.wait_for_selector(selectors["go_checkout"][0], state="visible", timeout=min(5000, timeout_ms))
+        await page.wait_for_selector(selectors["go_checkout"][0], state="visible", timeout=min(8000, timeout_ms))
         continue_ready = True
     except Exception:
         continue_ready = False
@@ -168,25 +173,44 @@ async def add_product(
         await safe_click(
             page,
             selectors["go_checkout"][0],
-            timeout_ms=min(3500, timeout_ms),
+            timeout_ms=min(8000, timeout_ms),
             logger=logger,
             step_name="post_add_continue",
+        )
+        return
+
+    cart_opened = False
+    if await page.locator(selectors["cart_open"][0]).first.is_visible(timeout=3000):
+        await safe_click(
+            page,
+            selectors["cart_open"][0],
+            timeout_ms=min(10000, timeout_ms),
+            logger=logger,
+            step_name="post_add_open_cart",
+            allow_force=True,
+        )
+        await wait_for_cart_ready(
+            page,
+            timeout_ms=min(timeout_ms, 12000),
+            logger=logger,
+            selectors=selectors,
+            previous_badge_count=badge_before,
+        )
+        cart_opened = True
+
+    if await page.locator(selectors["go_checkout"][0]).first.is_visible(timeout=4000):
+        await safe_click(
+            page,
+            selectors["go_checkout"][0],
+            timeout_ms=min(8000, timeout_ms),
+            logger=logger,
+            step_name="post_add_continue_from_cart",
         )
     else:
         if cart_opened:
             logger("[DEBUG] post_add_continue: cart opened but 'Continuar' not visible yet; Step 9 will handle checkout transition.")
         else:
             logger("[DEBUG] post_add_continue: cart not opened and 'Continuar' not visible; Step 9 will handle checkout transition.")
-
-    updated = False
-    if "/checkout" in page.url.lower() or await page.locator(selectors["go_checkout"][0]).first.is_visible(timeout=2500):
-        updated = True
-    else:
-        badge_after = await read_cart_badge_count(page, selectors["cart_badge"][0])
-        if badge_after is not None and (badge_before is None or badge_after > badge_before):
-            updated = True
-    if not updated:
-        raise CheckoutStepError("Cart state did not update after add-product action.")
 
 
 async def go_to_checkout(
@@ -198,30 +222,35 @@ async def go_to_checkout(
     if "/checkout" in page.url.lower():
         logger("[DEBUG] go_checkout: already on checkout URL")
         return
-    if not await page.locator(selectors["go_checkout"][0]).first.is_visible(timeout=1200):
+    if not await page.locator(selectors["go_checkout"][0]).first.is_visible(timeout=3000):
         await safe_click(
             page,
             selectors["cart_open"][0],
-            timeout_ms=min(timeout_ms, 7000),
+            timeout_ms=min(timeout_ms, 12000),
             logger=logger,
             step_name="cart_open_checkout",
             ready_selector=selectors["global_search_input"][0],
             allow_force=True,
         )
-        await wait_for_cart_ready(page, timeout_ms=min(timeout_ms, 7000), logger=logger)
+        await wait_for_cart_ready(
+            page,
+            timeout_ms=min(timeout_ms, 12000),
+            logger=logger,
+            selectors=selectors,
+        )
 
     await safe_click(
         page,
         selectors["go_checkout"][0],
-        timeout_ms=min(timeout_ms, 7000),
+        timeout_ms=min(timeout_ms, 10000),
         logger=logger,
         step_name="go_checkout",
     )
-    if await page.locator(selectors["skip_upsell"][0]).first.is_visible(timeout=1800):
+    if await page.locator(selectors["skip_upsell"][0]).first.is_visible(timeout=3000):
         await safe_click(
             page,
             selectors["skip_upsell"][0],
-            timeout_ms=min(timeout_ms, 3500),
+            timeout_ms=min(timeout_ms, 6000),
             logger=logger,
             step_name="skip_upsell",
         )
