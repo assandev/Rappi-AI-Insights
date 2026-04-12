@@ -36,7 +36,6 @@ data/screenshots/
 data/rappi/
 data/ubereats/
 data/processed/
-data/plots/
 
 # Keep placeholder files when needed
 !data/screenshots/
