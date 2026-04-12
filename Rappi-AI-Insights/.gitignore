@@ -1,0 +1,44 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Local secrets / session state
+.env
+.env.*
+auth/state_*.json
+
+# Runtime debug artifacts
+debug/
+*.log
+
+# Matplotlib local cache produced by analysis scripts
+analysis/.mplconfig/
+data/.mplconfig/
+
+# Generated scraper outputs (can be regenerated)
+data/screenshots/
+data/rappi/
+data/ubereats/
+data/processed/
+data/plots/
+
+# Keep placeholder files when needed
+!data/screenshots/
+data/screenshots/*
+!data/screenshots/.gitkeep
