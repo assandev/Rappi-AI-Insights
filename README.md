@@ -104,22 +104,51 @@ Each normalized record includes:
 python -m pip install -r Rappi-AI-Insights/requirements.txt
 ```
 
-2. Run scrapers:
+2. Create login state once per platform (manual login bootstrap):
 ```bash
 cd Rappi-AI-Insights
+python auth/login_once_rappi.py
+python auth/login_once_ubereats.py
+```
+This generates reusable session files:
+- `Rappi-AI-Insights/auth/state_rappi.json`
+- `Rappi-AI-Insights/auth/state_ubereats.json`
+
+3. Configure scraping scope before running:
+- Edit `Rappi-AI-Insights/rappi/config.py`:
+- `PRODUCTS` (items to scrape)
+- `ADDRESSES` (zones/addresses to scrape)
+- Edit `Rappi-AI-Insights/ubereats/config.py`:
+- `PRODUCTS` (items to scrape)
+- `ADDRESSES` (zones/addresses to scrape)
+
+4. Run scrapers:
+```bash
 python -m rappi.main
 python -m ubereats.main
 ```
 
-3. Build unified CSV:
+5. Build unified CSV:
 ```bash
 python analysis/analysis_checkout.py
 ```
 
-4. Generate charts:
+6. Generate charts:
 ```bash
 python analysis/create_charts.py
 ```
+
+## Debug Artifacts
+Both scrapers store run evidence to support reproducibility and debugging:
+- Screenshots:
+- `Rappi-AI-Insights/data/rappi/screenshots/runs/...`
+- `Rappi-AI-Insights/data/ubereats/screenshots/runs/...`
+- Network captures:
+- `Rappi-AI-Insights/data/rappi/network/...`
+- `Rappi-AI-Insights/data/ubereats/network/runs/...`
+- Result JSONs:
+- `Rappi-AI-Insights/data/rappi/results/checkout_result_rappi.json`
+- `Rappi-AI-Insights/data/ubereats/results/checkout_result_ubereats.json`
 
 ## Limitations
 - Uber Eats UI can change frequently, affecting selector stability.
