@@ -37,6 +37,14 @@ data/rappi/
 data/ubereats/
 data/processed/
 
+# Allow keeping cleaned/processed datasets per platform
+!data/rappi/
+!data/rappi/processed/
+!data/rappi/processed/**
+!data/ubereats/
+!data/ubereats/processed/
+!data/ubereats/processed/**
+
 # Keep placeholder files when needed
 !data/screenshots/
 data/screenshots/*

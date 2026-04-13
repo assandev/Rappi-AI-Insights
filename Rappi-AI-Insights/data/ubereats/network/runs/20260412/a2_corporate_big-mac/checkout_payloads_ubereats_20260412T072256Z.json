@@ -1,0 +1,947 @@
+{
+  "ts": "2026-04-12T07:23:58.271231+00:00",
+  "step": 10,
+  "url": "https://www.ubereats.com/mx/checkout?mod=magicUpsell&ps=1",
+  "payload_steps": {
+    "checkout_presentation": 10,
+    "checkout": 10
+  },
+  "payloads": {
+    "checkout_presentation": {
+      "status": "success",
+      "data": {
+        "checkoutPayloads": {
+          "subtotal": {
+            "subtotal": {
+              "value": {
+                "amountE5": 13500000,
+                "currencyCode": "MXN"
+              },
+              "formattedValue": "$135.00"
+            },
+            "subtotalDisclaimers": null,
+            "formattedLeadingText": {
+              "richTextElements": [
+                {
+                  "text": {
+                    "text": {
+                      "text": "Subtotal",
+                      "font": {
+                        "style": "LABEL_LARGE",
+                        "weight": "MEDIUM"
+                      },
+                      "color": "CONTENT_PRIMARY"
+                    },
+                    "predefinedDecorations": null
+                  },
+                  "type": "text"
+                }
+              ]
+            },
+            "formattedSubtotalAmount": {
+              "richTextElements": [
+                {
+                  "text": {
+                    "text": {
+                      "text": "$135.00",
+                      "font": {
+                        "style": "LABEL_LARGE",
+                        "weight": "MEDIUM"
+                      },
+                      "color": "CONTENT_PRIMARY"
+                    },
+                    "predefinedDecorations": null
+                  },
+                  "type": "text"
+                }
+              ],
+              "accessibilityText": "$135.00"
+            }
+          },
+          "paymentBarPayload": null,
+          "total": {
+            "total": {
+              "value": {
+                "amountE5": 20070000,
+                "currencyCode": "MXN"
+              },
+              "formattedValue": "$200.70"
+            }
+          },
+          "upfrontTipping": {
+            "currencyCode": "MXN",
+            "options": [
+              {
+                "amount": 911,
+                "displayText": "5%",
+                "isSelectedTip": false,
+                "subtitleText": "$9.11",
+                "isOther": false,
+                "percent": 500
+              },
+              {
+                "amount": 1825,
+                "displayText": "10%",
+                "isSelectedTip": true,
+                "subtitleText": "$18.25",
+                "isOther": false,
+                "percent": 1000
+              },
+              {
+                "amount": 2737,
+                "displayText": "15%",
+                "isSelectedTip": false,
+                "subtitleText": "$27.37",
+                "isOther": false,
+                "percent": 1500
+              },
+              {
+                "amount": 3649,
+                "displayText": "20%",
+                "isSelectedTip": false,
+                "subtitleText": "$36.49",
+                "isOther": false,
+                "percent": 2000
+              }
+            ],
+            "orderAmount": 18245,
+            "maxAmount": 27368,
+            "maxAmountCurrencyCode": "MXN",
+            "minAmount": 0,
+            "tipTitle": "Agrega un extra por la entrega que recibiste tarde por la noche",
+            "educationText": "Las entregas a cualquier hora no serían posibles sin ellos",
+            "infoSheet": {
+              "title": "Agrega más como agradecimiento",
+              "body": [
+                {
+                  "breakStyle": "single",
+                  "children": [
+                    {
+                      "type": "text",
+                      "fontSize": "body3",
+                      "text": "Agregar un monto extra es una manera opcional de agradecer al socio de la App. Puedes elegir Personalizar e ingresar MXN 0. Se calcula de acuerdo con el monto total del pedido de MXN $182.45 antes de aplicar cualquier ahorro o promoción. El socio de la App recibe el total del monto extra y puedes cambiarlo hasta 1 hora después de la entrega.",
+                      "color": "contentPrimary"
+                    }
+                  ]
+                },
+                {
+                  "breakStyle": "single",
+                  "children": [
+                    {
+                      "type": "text",
+                      "fontSize": "body3",
+                      "text": " Este monto extra se cobrará el Mastercard ••••8217.",
+                      "color": "contentPrimary"
+                    }
+                  ]
+                }
+              ],
+              "buttonText": "Entendido"
+            },
+            "responseTextOnSave": "¡Gracias!",
+            "customTipOption": {
+              "amount": 0,
+              "displayText": "Editar",
+              "subtitleText": null,
+              "isSelectedTip": false,
+              "percent": null,
+              "showCustomInputField": true,
+              "isStickyTip": false
+            },
+            "inlineTipMessage": {
+              "message": ""
+            },
+            "tipScreenType": "DEFAULT"
+          },
+          "promotion": {
+            "promotionState": "NONE_AVAILABLE",
+            "title": "Agrega un código promo",
+            "appliedPromotionUUIDs": null
+          },
+          "requestUtensilPayload": {},
+          "promoAndMembershipSavingBannerPayloadCheckout": null,
+          "fareBreakdown": {
+            "charges": [
+              {
+                "title": {
+                  "text": "Subtotal"
+                },
+                "value": {
+                  "text": "$135.00",
+                  "textFormat": "<span>$135.00</span>",
+                  "accessibilityText": "$135.00"
+                },
+                "subCharges": null,
+                "fareBreakdownChargeMetadata": {
+                  "fareInfoID": "eats_fare.subtotal",
+                  "analyticsInfo": [
+                    {
+                      "fareInfoID": "eats_fare.subtotal",
+                      "currencyAmount": {
+                        "amountE5": {
+                          "high": 0,
+                          "low": 13500000,
+                          "unsigned": false
+                        },
+                        "currencyCode": "MXN"
+                      }
+                    }
+                  ]
+                },
+                "disclaimers": null,
+                "chargeValue": {
+                  "badgeChargeValue": {
+                    "text": "$135.00",
+                    "textFormat": "<span>$135.00</span>",
+                    "accessibilityText": "$135.00"
+                  },
+                  "type": "badgeChargeValue"
+                }
+              },
+              {
+                "title": {
+                  "text": "Costo de envío"
+                },
+                "value": {
+                  "text": "$38.00",
+                  "textFormat": "<span>$38.00</span>",
+                  "accessibilityText": "$38.00"
+                },
+                "action": {
+                  "infoBottomSheet": {
+                    "title": {
+                      "text": "¿Por qué se incluye un Costo de envío?",
+                      "textFormat": "<span>¿Por qué se incluye un Costo de envío?</span>"
+                    },
+                    "body": {
+                      "text": "Esta tarifa cubre los costos de entrega. El monto varía para cada establecimiento en función de tu ubicación.",
+                      "textFormat": "<span>Esta tarifa cubre los costos de entrega. El monto varía para cada establecimiento en función de tu ubicación.</span>"
+                    },
+                    "buttonText": "Cerrar",
+                    "paragraphs": null
+                  },
+                  "type": "infoBottomSheet"
+                },
+                "subCharges": null,
+                "fareBreakdownChargeMetadata": {
+                  "fareInfoID": "eats_fare.delivery_fee",
+                  "analyticsInfo": [
+                    {
+                      "fareInfoID": "eats_fare.delivery_fee",
+                      "currencyAmount": {
+                        "amountE5": {
+                          "high": 0,
+                          "low": 3800000,
+                          "unsigned": false
+                        },
+                        "currencyCode": "MXN"
+                      }
+                    }
+                  ]
+                },
+                "disclaimers": null,
+                "chargeValue": {
+                  "badgeChargeValue": {
+                    "text": "$38.00",
+                    "textFormat": "<span>$38.00</span>",
+                    "accessibilityText": "$38.00"
+                  },
+                  "type": "badgeChargeValue"
+                }
+              },
+              {
+                "title": {
+                  "text": "Cuota de servicio"
+                },
+                "value": {
+                  "text": "$9.45",
+                  "textFormat": "<span>$9.45</span>",
+                  "accessibilityText": "$9.45"
+                },
+                "action": {
+                  "infoBottomSheet": {
+                    "title": {
+                      "text": "¿Qué es la tasa de servicio?",
+                      "textFormat": "<span>¿Qué es la tasa de servicio?</span>"
+                    },
+                    "body": {
+                      "text": "La tarifa varía según factores como el tamaño del pedido y ayuda a cubrir el costo relacionado.",
+                      "textFormat": "<span>La tarifa varía según factores como el tamaño del pedido y ayuda a cubrir el costo relacionado.</span>"
+                    },
+                    "buttonText": "Entendido",
+                    "paragraphs": null
+                  },
+                  "type": "infoBottomSheet"
+                },
+                "subCharges": null,
+                "fareBreakdownChargeMetadata": {
+                  "fareInfoID": "eats.mp.charges.basket_dependent_fee_intl",
+                  "analyticsInfo": [
+                    {
+                      "fareInfoID": "eats.mp.charges.basket_dependent_fee_intl",
+                      "currencyAmount": {
+                        "amountE5": {
+                          "high": 0,
+                          "low": 945000,
+                          "unsigned": false
+                        },
+                        "currencyCode": "MXN"
+                      }
+                    }
+                  ]
+                },
+                "disclaimers": null,
+                "chargeValue": {
+                  "badgeChargeValue": {
+                    "text": "$9.45",
+                    "textFormat": "<span>$9.45</span>",
+                    "accessibilityText": "$9.45"
+                  },
+                  "type": "badgeChargeValue"
+                }
+              }
+            ],
+            "plannedPayments": null,
+            "entityPayments": null
+          },
+          "deliveryOptInInfo": {
+            "displayInfos": [
+              {
+                "optInDetails": {
+                  "optIn": false,
+                  "optInType": "PREMIUM_DELIVERY"
+                },
+                "title": {
+                  "text": "Prioritaria",
+                  "textFormat": "<span style=\"font-family:M1;color:#262626;\">Prioritaria</span>"
+                },
+                "subTitle": {
+                  "text": "+$59.00",
+                  "textFormat": "<span style=\"font-family:S1;color:#262626;\">+$59.00</span>"
+                },
+                "description": {
+                  "text": "1:37–1:50 AM • Directo a ti. Repartidores con las mejores calificaciones",
+                  "textFormat": "<span style=\"font-family:S1;color:#545454;\"><span style=\"font-family:S1;color:#262626;\">1:37–1:50 AM</span> • Directo a ti. Repartidores con las mejores calificaciones</span>"
+                },
+                "leadingIllustration": {
+                  "type": "LOTTIE",
+                  "lottieURL": "https://d4p17acsd5wyj.cloudfront.net/checkout-priority-upsell/lightning.json"
+                },
+                "richPrimaryLabel": {
+                  "richTextElements": [
+                    {
+                      "text": {
+                        "text": {
+                          "text": "Prioritaria",
+                          "font": {
+                            "style": "LABEL_DEFAULT",
+                            "weight": "MEDIUM"
+                          },
+                          "color": "CONTENT_PRIMARY"
+                        },
+                        "predefinedDecorations": null
+                      },
+                      "type": "text"
+                    }
+                  ]
+                },
+                "richTertiaryLabel": {
+                  "richTextElements": [
+                    {
+                      "text": {
+                        "text": {
+                          "text": "1:37–1:50 AM",
+                          "font": {
+                            "style": "PARAGRAPH_SMALL",
+                            "weight": "NORMAL"
+                          },
+                          "color": "CONTENT_PRIMARY"
+                        },
+                        "predefinedDecorations": null
+                      },
+                      "type": "text"
+                    },
+                    {
+                      "text": {
+                        "text": {
+                          "text": " • ",
+                          "font": {
+                            "style": "PARAGRAPH_SMALL",
+                            "weight": "NORMAL"
+                          },
+                          "color": "CONTENT_TERTIARY"
+                        },
+                        "predefinedDecorations": null
+                      },
+                      "type": "text"
+                    },
+                    {
+                      "text": {
+                        "text": {
+                          "text": "Directo a ti. Repartidores con las mejores calificaciones",
+                          "font": {
+                            "style": "PARAGRAPH_SMALL",
+                            "weight": "NORMAL"
+                          },
+                          "color": "CONTENT_TERTIARY"
+                        },
+                        "predefinedDecorations": null
+                      },
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              {
+                "optInDetails": {
+                  "optIn": true,
+                  "optInType": "STANDARD_DELIVERY"
+                },
+                "title": {
+                  "text": "Básica",
+                  "textFormat": "<span style=\"font-family:M1;color:#262626;\">Básica</span>"
+                },
+                "description": {
+                  "text": "1:37–1:56 AM",
+                  "textFormat": "<span style=\"font-family:S1;color:#262626;\">1:37–1:56 AM</span>"
+                },
+                "leadingIllustration": {
+                  "type": "ICON",
+                  "icon": {
+                    "icon": "DELIVERY_BAG_MOVE"
+                  }
+                },
+                "richPrimaryLabel": {
+                  "richTextElements": [
+                    {
+                      "text": {
+                        "text": {
+                          "text": "Básica",
+                          "font": {
+                            "style": "LABEL_DEFAULT",
+                            "weight": "MEDIUM"
+                          },
+                          "color": "CONTENT_PRIMARY"
+                        },
+                        "predefinedDecorations": null
+                      },
+                      "type": "text"
+                    }
+                  ]
+                },
+                "richTertiaryLabel": {
+                  "richTextElements": [
+                    {
+                      "text": {
+                        "text": {
+                          "text": "1:37–1:56 AM",
+                          "font": {
+                            "style": "PARAGRAPH_SMALL",
+                            "weight": "NORMAL"
+                          },
+                          "color": "CONTENT_PRIMARY"
+                        },
+                        "predefinedDecorations": null
+                      },
+                      "type": "text"
+                    }
+                  ]
+                }
+              }
+            ],
+            "disclaimerBanners": null,
+            "layoutType": "HORIZONTAL"
+          },
+          "eta": {
+            "rangeText": "1:37–1:56 AM",
+            "prefixText": "Opciones de entrega",
+            "scheduleText": "Programar"
+          },
+          "restrictedItems": null,
+          "orderConfirmations": null,
+          "paymentProfilesEligibility": {
+            "eligibilityPayloadList": null
+          }
+        },
+        "validationErrors": null,
+        "draftOrderUUID": "b669587b-8028-4f1a-a4e5-595505fed97c",
+        "draftOrders": [
+          {
+            "uuid": "b669587b-8028-4f1a-a4e5-595505fed97c",
+            "paymentProfileUUID": "22898658-abcf-545d-8d6e-7ef779abde2a",
+            "extraPaymentProfiles": [],
+            "useCredits": true
+          }
+        ]
+      }
+    },
+    "checkout": {
+      "status": "success",
+      "data": {
+        "checkoutPayloads": {
+          "subtotal": {
+            "subtotal": {
+              "value": {
+                "amountE5": 13500000,
+                "currencyCode": "MXN"
+              },
+              "formattedValue": "$135.00"
+            },
+            "subtotalDisclaimers": null,
+            "formattedLeadingText": {
+              "richTextElements": [
+                {
+                  "text": {
+                    "text": {
+                      "text": "Subtotal",
+                      "font": {
+                        "style": "LABEL_LARGE",
+                        "weight": "MEDIUM"
+                      },
+                      "color": "CONTENT_PRIMARY"
+                    },
+                    "predefinedDecorations": null
+                  },
+                  "type": "text"
+                }
+              ]
+            },
+            "formattedSubtotalAmount": {
+              "richTextElements": [
+                {
+                  "text": {
+                    "text": {
+                      "text": "$135.00",
+                      "font": {
+                        "style": "LABEL_LARGE",
+                        "weight": "MEDIUM"
+                      },
+                      "color": "CONTENT_PRIMARY"
+                    },
+                    "predefinedDecorations": null
+                  },
+                  "type": "text"
+                }
+              ],
+              "accessibilityText": "$135.00"
+            }
+          },
+          "paymentBarPayload": null,
+          "total": {
+            "total": {
+              "value": {
+                "amountE5": 20070000,
+                "currencyCode": "MXN"
+              },
+              "formattedValue": "$200.70"
+            }
+          },
+          "upfrontTipping": {
+            "currencyCode": "MXN",
+            "options": [
+              {
+                "amount": 911,
+                "displayText": "5%",
+                "isSelectedTip": false,
+                "subtitleText": "$9.11",
+                "isOther": false,
+                "percent": 500
+              },
+              {
+                "amount": 1825,
+                "displayText": "10%",
+                "isSelectedTip": true,
+                "subtitleText": "$18.25",
+                "isOther": false,
+                "percent": 1000
+              },
+              {
+                "amount": 2737,
+                "displayText": "15%",
+                "isSelectedTip": false,
+                "subtitleText": "$27.37",
+                "isOther": false,
+                "percent": 1500
+              },
+              {
+                "amount": 3649,
+                "displayText": "20%",
+                "isSelectedTip": false,
+                "subtitleText": "$36.49",
+                "isOther": false,
+                "percent": 2000
+              }
+            ],
+            "orderAmount": 18245,
+            "maxAmount": 27368,
+            "maxAmountCurrencyCode": "MXN",
+            "minAmount": 0,
+            "tipTitle": "Agrega un extra por la entrega que recibiste tarde por la noche",
+            "educationText": "Las entregas a cualquier hora no serían posibles sin ellos",
+            "infoSheet": {
+              "title": "Agrega más como agradecimiento",
+              "body": [
+                {
+                  "breakStyle": "single",
+                  "children": [
+                    {
+                      "type": "text",
+                      "fontSize": "body3",
+                      "text": "Agregar un monto extra es una manera opcional de agradecer al socio de la App. Puedes elegir Personalizar e ingresar MXN 0. Se calcula de acuerdo con el monto total del pedido de MXN $182.45 antes de aplicar cualquier ahorro o promoción. El socio de la App recibe el total del monto extra y puedes cambiarlo hasta 1 hora después de la entrega.",
+                      "color": "contentPrimary"
+                    }
+                  ]
+                },
+                {
+                  "breakStyle": "single",
+                  "children": [
+                    {
+                      "type": "text",
+                      "fontSize": "body3",
+                      "text": " Este monto extra se cobrará el Mastercard ••••8217.",
+                      "color": "contentPrimary"
+                    }
+                  ]
+                }
+              ],
+              "buttonText": "Entendido"
+            },
+            "responseTextOnSave": "¡Gracias!",
+            "customTipOption": {
+              "amount": 0,
+              "displayText": "Editar",
+              "subtitleText": null,
+              "isSelectedTip": false,
+              "percent": null,
+              "showCustomInputField": true,
+              "isStickyTip": false
+            },
+            "inlineTipMessage": {
+              "message": ""
+            },
+            "tipScreenType": "DEFAULT"
+          },
+          "promotion": {
+            "promotionState": "NONE_AVAILABLE",
+            "title": "Agrega un código promo",
+            "appliedPromotionUUIDs": null
+          },
+          "requestUtensilPayload": {},
+          "promoAndMembershipSavingBannerPayloadCheckout": null,
+          "fareBreakdown": {
+            "charges": [
+              {
+                "title": {
+                  "text": "Subtotal"
+                },
+                "value": {
+                  "text": "$135.00",
+                  "textFormat": "<span>$135.00</span>",
+                  "accessibilityText": "$135.00"
+                },
+                "subCharges": null,
+                "fareBreakdownChargeMetadata": {
+                  "fareInfoID": "eats_fare.subtotal",
+                  "analyticsInfo": [
+                    {
+                      "fareInfoID": "eats_fare.subtotal",
+                      "currencyAmount": {
+                        "amountE5": {
+                          "high": 0,
+                          "low": 13500000,
+                          "unsigned": false
+                        },
+                        "currencyCode": "MXN"
+                      }
+                    }
+                  ]
+                },
+                "disclaimers": null,
+                "chargeValue": {
+                  "badgeChargeValue": {
+                    "text": "$135.00",
+                    "textFormat": "<span>$135.00</span>",
+                    "accessibilityText": "$135.00"
+                  },
+                  "type": "badgeChargeValue"
+                }
+              },
+              {
+                "title": {
+                  "text": "Costo de envío"
+                },
+                "value": {
+                  "text": "$38.00",
+                  "textFormat": "<span>$38.00</span>",
+                  "accessibilityText": "$38.00"
+                },
+                "action": {
+                  "infoBottomSheet": {
+                    "title": {
+                      "text": "¿Por qué se incluye un Costo de envío?",
+                      "textFormat": "<span>¿Por qué se incluye un Costo de envío?</span>"
+                    },
+                    "body": {
+                      "text": "Esta tarifa cubre los costos de entrega. El monto varía para cada establecimiento en función de tu ubicación.",
+                      "textFormat": "<span>Esta tarifa cubre los costos de entrega. El monto varía para cada establecimiento en función de tu ubicación.</span>"
+                    },
+                    "buttonText": "Cerrar",
+                    "paragraphs": null
+                  },
+                  "type": "infoBottomSheet"
+                },
+                "subCharges": null,
+                "fareBreakdownChargeMetadata": {
+                  "fareInfoID": "eats_fare.delivery_fee",
+                  "analyticsInfo": [
+                    {
+                      "fareInfoID": "eats_fare.delivery_fee",
+                      "currencyAmount": {
+                        "amountE5": {
+                          "high": 0,
+                          "low": 3800000,
+                          "unsigned": false
+                        },
+                        "currencyCode": "MXN"
+                      }
+                    }
+                  ]
+                },
+                "disclaimers": null,
+                "chargeValue": {
+                  "badgeChargeValue": {
+                    "text": "$38.00",
+                    "textFormat": "<span>$38.00</span>",
+                    "accessibilityText": "$38.00"
+                  },
+                  "type": "badgeChargeValue"
+                }
+              },
+              {
+                "title": {
+                  "text": "Cuota de servicio"
+                },
+                "value": {
+                  "text": "$9.45",
+                  "textFormat": "<span>$9.45</span>",
+                  "accessibilityText": "$9.45"
+                },
+                "action": {
+                  "infoBottomSheet": {
+                    "title": {
+                      "text": "¿Qué es la tasa de servicio?",
+                      "textFormat": "<span>¿Qué es la tasa de servicio?</span>"
+                    },
+                    "body": {
+                      "text": "La tarifa varía según factores como el tamaño del pedido y ayuda a cubrir el costo relacionado.",
+                      "textFormat": "<span>La tarifa varía según factores como el tamaño del pedido y ayuda a cubrir el costo relacionado.</span>"
+                    },
+                    "buttonText": "Entendido",
+                    "paragraphs": null
+                  },
+                  "type": "infoBottomSheet"
+                },
+                "subCharges": null,
+                "fareBreakdownChargeMetadata": {
+                  "fareInfoID": "eats.mp.charges.basket_dependent_fee_intl",
+                  "analyticsInfo": [
+                    {
+                      "fareInfoID": "eats.mp.charges.basket_dependent_fee_intl",
+                      "currencyAmount": {
+                        "amountE5": {
+                          "high": 0,
+                          "low": 945000,
+                          "unsigned": false
+                        },
+                        "currencyCode": "MXN"
+                      }
+                    }
+                  ]
+                },
+                "disclaimers": null,
+                "chargeValue": {
+                  "badgeChargeValue": {
+                    "text": "$9.45",
+                    "textFormat": "<span>$9.45</span>",
+                    "accessibilityText": "$9.45"
+                  },
+                  "type": "badgeChargeValue"
+                }
+              }
+            ],
+            "plannedPayments": null,
+            "entityPayments": null
+          },
+          "deliveryOptInInfo": {
+            "displayInfos": [
+              {
+                "optInDetails": {
+                  "optIn": false,
+                  "optInType": "PREMIUM_DELIVERY"
+                },
+                "title": {
+                  "text": "Prioritaria",
+                  "textFormat": "<span style=\"font-family:M1;color:#262626;\">Prioritaria</span>"
+                },
+                "subTitle": {
+                  "text": "+$59.00",
+                  "textFormat": "<span style=\"font-family:S1;color:#262626;\">+$59.00</span>"
+                },
+                "description": {
+                  "text": "1:37–1:50 AM • Directo a ti. Repartidores con las mejores calificaciones",
+                  "textFormat": "<span style=\"font-family:S1;color:#545454;\"><span style=\"font-family:S1;color:#262626;\">1:37–1:50 AM</span> • Directo a ti. Repartidores con las mejores calificaciones</span>"
+                },
+                "leadingIllustration": {
+                  "type": "LOTTIE",
+                  "lottieURL": "https://d4p17acsd5wyj.cloudfront.net/checkout-priority-upsell/lightning.json"
+                },
+                "richPrimaryLabel": {
+                  "richTextElements": [
+                    {
+                      "text": {
+                        "text": {
+                          "text": "Prioritaria",
+                          "font": {
+                            "style": "LABEL_DEFAULT",
+                            "weight": "MEDIUM"
+                          },
+                          "color": "CONTENT_PRIMARY"
+                        },
+                        "predefinedDecorations": null
+                      },
+                      "type": "text"
+                    }
+                  ]
+                },
+                "richTertiaryLabel": {
+                  "richTextElements": [
+                    {
+                      "text": {
+                        "text": {
+                          "text": "1:37–1:50 AM",
+                          "font": {
+                            "style": "PARAGRAPH_SMALL",
+                            "weight": "NORMAL"
+                          },
+                          "color": "CONTENT_PRIMARY"
+                        },
+                        "predefinedDecorations": null
+                      },
+                      "type": "text"
+                    },
+                    {
+                      "text": {
+                        "text": {
+                          "text": " • ",
+                          "font": {
+                            "style": "PARAGRAPH_SMALL",
+                            "weight": "NORMAL"
+                          },
+                          "color": "CONTENT_TERTIARY"
+                        },
+                        "predefinedDecorations": null
+                      },
+                      "type": "text"
+                    },
+                    {
+                      "text": {
+                        "text": {
+                          "text": "Directo a ti. Repartidores con las mejores calificaciones",
+                          "font": {
+                            "style": "PARAGRAPH_SMALL",
+                            "weight": "NORMAL"
+                          },
+                          "color": "CONTENT_TERTIARY"
+                        },
+                        "predefinedDecorations": null
+                      },
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              {
+                "optInDetails": {
+                  "optIn": true,
+                  "optInType": "STANDARD_DELIVERY"
+                },
+                "title": {
+                  "text": "Básica",
+                  "textFormat": "<span style=\"font-family:M1;color:#262626;\">Básica</span>"
+                },
+                "description": {
+                  "text": "1:37–1:56 AM",
+                  "textFormat": "<span style=\"font-family:S1;color:#262626;\">1:37–1:56 AM</span>"
+                },
+                "leadingIllustration": {
+                  "type": "ICON",
+                  "icon": {
+                    "icon": "DELIVERY_BAG_MOVE"
+                  }
+                },
+                "richPrimaryLabel": {
+                  "richTextElements": [
+                    {
+                      "text": {
+                        "text": {
+                          "text": "Básica",
+                          "font": {
+                            "style": "LABEL_DEFAULT",
+                            "weight": "MEDIUM"
+                          },
+                          "color": "CONTENT_PRIMARY"
+                        },
+                        "predefinedDecorations": null
+                      },
+                      "type": "text"
+                    }
+                  ]
+                },
+                "richTertiaryLabel": {
+                  "richTextElements": [
+                    {
+                      "text": {
+                        "text": {
+                          "text": "1:37–1:56 AM",
+                          "font": {
+                            "style": "PARAGRAPH_SMALL",
+                            "weight": "NORMAL"
+                          },
+                          "color": "CONTENT_PRIMARY"
+                        },
+                        "predefinedDecorations": null
+                      },
+                      "type": "text"
+                    }
+                  ]
+                }
+              }
+            ],
+            "disclaimerBanners": null,
+            "layoutType": "HORIZONTAL"
+          },
+          "eta": {
+            "rangeText": "1:37–1:56 AM",
+            "prefixText": "Opciones de entrega",
+            "scheduleText": "Programar"
+          },
+          "restrictedItems": null,
+          "orderConfirmations": null,
+          "paymentProfilesEligibility": {
+            "eligibilityPayloadList": null
+          }
+        },
+        "validationErrors": null,
+        "draftOrderUUID": "b669587b-8028-4f1a-a4e5-595505fed97c",
+        "draftOrders": [
+          {
+            "uuid": "b669587b-8028-4f1a-a4e5-595505fed97c",
+            "paymentProfileUUID": "22898658-abcf-545d-8d6e-7ef779abde2a",
+            "extraPaymentProfiles": [],
+            "useCredits": true
+          }
+        ]
+      }
+    }
+  }
+}

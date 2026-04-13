@@ -9,7 +9,7 @@ from typing import Any
 import pandas as pd
 
 DEFAULT_INPUTS = [
-    "data/screenshots/checkout_result.json",
+    "data/rappi/results/checkout_result_rappi.json",
     "data/ubereats/results/checkout_result_ubereats.json",
 ]
 DEFAULT_OUTPUT = "data/processed/checkout_results_unified.csv"

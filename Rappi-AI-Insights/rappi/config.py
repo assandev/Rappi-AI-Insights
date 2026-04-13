@@ -47,9 +47,9 @@ ADDRESSES = [
 
 START_URL = "https://www.rappi.com.mx/"
 STORAGE_STATE = Path("auth/state_rappi.json")
-SCREENSHOT_DIR = Path("data/screenshots")
-NETWORK_LOG_FILE = Path("data/screenshots/checkout_network_trace.jsonl")
-RESULT_FILE = Path("data/screenshots/checkout_result.json")
+SCREENSHOT_DIR = Path("data/rappi/screenshots")
+NETWORK_LOG_FILE = Path("data/rappi/network/checkout_network_trace_rappi.jsonl")
+RESULT_FILE = Path("data/rappi/results/checkout_result_rappi.json")
 
 TIMEOUT_MS = 45000
 INCLUDE_BODY = False

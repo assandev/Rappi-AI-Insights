@@ -1,0 +1,3 @@
+platform,zone_type,address,product,restaurant,subtotal,delivery_fee,service_fee,total,eta_avg_minutes,currency,status,fee_total,fee_share_pct,delivery_share_pct,service_share_pct,total_per_minute
+ubereats,corporate,"Paseo de la Reforma 222, Juarez, 06600 Cuauhtemoc, CDMX, Mexico",Cuarto de Libra con Queso,McDonald's,145.0,26.0,10.15,199.27,14.6,MXN,success,36.15,18.14121543634265,13.047623826968435,5.093591609374216,13.648630136986302
+ubereats,corporate,"Paseo de la Reforma 222, Juarez, 06600 Cuauhtemoc, CDMX, Mexico",McFlurry Oreo,McDonald's,59.0,26.0,6.77,100.95,15.21,MXN,success,32.769999999999996,32.46161466072313,25.755324418028724,6.706290242694403,6.6370808678500985

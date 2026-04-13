@@ -1,0 +1,16 @@
+{
+  "ts": "2026-04-12T20:14:25.652405+00:00",
+  "step": 10,
+  "url": "https://www.ubereats.com/mx/checkout?mod=magicUpsell&ps=1",
+  "payload_steps": {
+    "order": 10
+  },
+  "payloads": {
+    "order": {
+      "status": "success",
+      "data": {
+        "numOrders": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "ts": "2026-04-12T16:10:48.619054+00:00",
+  "step": 10,
+  "url": "https://www.ubereats.com/mx/checkout?mod=magicUpsell&ps=1",
+  "payload_steps": {
+    "carts_view": 10,
+    "cart": 10
+  },
+  "payloads": {
+    "carts_view": {
+      "status": "success",
+      "data": {
+        "cartsView": {
+          "carts": [
+            {
+              "draftOrderUUID": "1e0a3a9f-0c39-4b12-8662-73d096e8a464",
+              "title": "McDonald's Cuauhtemoc Esperanza",
+              "tagline1": {
+                "text": "Subtotal: $40.00",
+                "textFormat": "<span style=\"font-family:Uber Move Text;color:#545454;\">Subtotal: $40.00</span>"
+              },
+              "tagline2": {
+                "text": "Entregar en Av. Álvaro Obregón 100",
+                "textFormat": "<span style=\"font-family:Uber Move Text;color:#545454;\">Entregar en Av. Álvaro Obregón 100</span>"
+              },
+              "storeImageUrls": [
+                "https://tb-static.uber.com/prod/image-proc/processed_images/102a1335b54b71d7a9a5329dceb2f3ad/c67d558c633281f9c71fc6a90ef470ae.jpeg"
+              ],
+              "itemCount": 1,
+              "action": "OPEN_CHECKOUT",
+              "metadata": {
+                "openCheckoutMetadata": {
+                  "draftOrderUUID": "1e0a3a9f-0c39-4b12-8662-73d096e8a464"
+                }
+              },
+              "actions": [
+                {
+                  "metadata": {
+                    "openCheckoutMetadata": {
+                      "draftOrderUUID": "1e0a3a9f-0c39-4b12-8662-73d096e8a464"
+                    },
+                    "type": "openCheckoutMetadata"
+                  }
+                },
+                {
+                  "metadata": {
+                    "openStorefrontMetadata": {
+                      "storeSlug": "mcdonalds-cuauhtemoc-esperanza"
+                    },
+                    "type": "openStorefrontMetadata"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "cart": {
+      "status": "success",
+      "data": {
+        "cartsView": {
+          "carts": [
+            {
+              "draftOrderUUID": "1e0a3a9f-0c39-4b12-8662-73d096e8a464",
+              "title": "McDonald's Cuauhtemoc Esperanza",
+              "tagline1": {
+                "text": "Subtotal: $40.00",
+                "textFormat": "<span style=\"font-family:Uber Move Text;color:#545454;\">Subtotal: $40.00</span>"
+              },
+              "tagline2": {
+                "text": "Entregar en Av. Álvaro Obregón 100",
+                "textFormat": "<span style=\"font-family:Uber Move Text;color:#545454;\">Entregar en Av. Álvaro Obregón 100</span>"
+              },
+              "storeImageUrls": [
+                "https://tb-static.uber.com/prod/image-proc/processed_images/102a1335b54b71d7a9a5329dceb2f3ad/c67d558c633281f9c71fc6a90ef470ae.jpeg"
+              ],
+              "itemCount": 1,
+              "action": "OPEN_CHECKOUT",
+              "metadata": {
+                "openCheckoutMetadata": {
+                  "draftOrderUUID": "1e0a3a9f-0c39-4b12-8662-73d096e8a464"
+                }
+              },
+              "actions": [
+                {
+                  "metadata": {
+                    "openCheckoutMetadata": {
+                      "draftOrderUUID": "1e0a3a9f-0c39-4b12-8662-73d096e8a464"
+                    },
+                    "type": "openCheckoutMetadata"
+                  }
+                },
+                {
+                  "metadata": {
+                    "openStorefrontMetadata": {
+                      "storeSlug": "mcdonalds-cuauhtemoc-esperanza"
+                    },
+                    "type": "openStorefrontMetadata"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
