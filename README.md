@@ -38,6 +38,18 @@ The analysis pipeline produces high-signal comparison charts across zones and pl
 ### 4) Cost per Minute (Price vs Delivery Time)
 ![Cost per Minute (Price vs Delivery Time)](Rappi-AI-Insights/data/plots/cost_per_minute_by_zone.png)
 
+## Executive Outputs
+For final business readouts, the project maintains two platform-specific executive files:
+- `Rappi-AI-Insights/data/processed/rappi_results_clean.csv`
+- `Rappi-AI-Insights/data/ubereats/processed/ubereats_results_clean.csv`
+
+These are used for competitive analysis between Rappi and Uber Eats, and can be combined with:
+- `Rappi-AI-Insights/data/processed/checkout_results_unified.csv`
+
+Executive deliverables are also included here:
+- `Rappi-AI-Insights/Análisis Competitivo Rappi vs Uber Eats.pdf`
+- `Rappi-AI-Insights/Análisis Competitivo Rappi vs Uber Eats.pptx`
+
 ## Architecture
 The system is split into three layers:
 
